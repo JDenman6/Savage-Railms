@@ -66,11 +66,11 @@ class CharactersController < ApplicationController
 
   def roll
     ability = params[:roll_type]
-    if ability.is_a? Integer
-      this_roll = @character.roll_message(@character.attributes[ability])
-    else
+    if ability == "skills"
       skill = params[:skill_type]
       this_roll = @character.roll_message(@character.attributes[ability][skill.to_sym])
+    else
+      this_roll = @character.roll_message(@character.attributes[ability])
     end
     respond_to do |format|
         format.html { redirect_to @character, notice: this_roll }
