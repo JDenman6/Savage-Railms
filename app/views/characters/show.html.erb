@@ -1,0 +1,58 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @character.name %>
+</p>
+
+<p>
+  <strong>Agility:</strong>
+  <%= @character.agility %>   |
+  <%= link_to 'Roll', "#{@character.id}/roll?roll_type=agility" %>
+</p>
+
+<p>
+  <strong>Smarts:</strong>
+  <%= @character.smarts %>  |
+  <%= link_to 'Roll', "#{@character.id}/roll?roll_type=smarts" %>
+</p>
+
+<p>
+  <strong>Spirit:</strong>
+  <%= @character.spirit %>  |
+  <%= link_to 'Roll', "#{@character.id}/roll?roll_type=spirit" %>
+</p>
+
+<p>
+  <strong>Strength:</strong>
+  <%= @character.strength %>  |
+  <%= link_to 'Roll', "#{@character.id}/roll?roll_type=strength" %>
+</p>
+
+<p>
+  <strong>Vigor:</strong>
+  <%= @character.vigor %>  |
+  <%= link_to 'Roll', "#{@character.id}/roll?roll_type=vigor" %>
+</p>
+<hr>
+
+<p>
+  <strong>Skills:</strong>
+  <ul>
+    <% if @character.skills.empty? %>
+      <li>None.</li>
+    <% else %>
+      <% @character.skills.each do |key, value| %>
+          <li>
+            <strong><%= "#{key.to_s.titlecase}: " %></strong>
+            <%= value.to_s %>   |
+            <%= link_to 'Roll', "#{@character.id}/roll?roll_type=skills&skill_type=#{key}" %>
+          </li>
+      <% end %>
+    <% end %>
+  </ul>
+
+</p>
+
+<%= link_to 'Edit', edit_character_path(@character) %> |
+<%= link_to 'Back', characters_path %>

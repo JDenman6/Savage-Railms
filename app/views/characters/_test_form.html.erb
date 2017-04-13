@@ -1,0 +1,73 @@
+<%= form_for(character, remote: true) do |f| %>
+
+  <% if character.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(character.errors.count, "error") %> prohibited this character from being saved:</h2>
+
+      <ul>
+      <% character.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <% unless @character.creation_points == 0 %>
+    <p>
+      <strong>Creation points remaining:</strong>
+      <span> <%= @character.creation_points %> </span>
+    </p>
+
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :agility %>
+    <%= f.number_field :agility, min: 4, max: 12, step: 2,
+    value: @character.agility || 6 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :smarts %>
+    <%= f.number_field :smarts, min: 4, max: 12, step: 2,
+    value: @character.smarts || 6 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :spirit %>
+    <%= f.number_field :spirit, min: 4, max: 12, step: 2,
+    value: @character.spirit || 6 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :strength %>
+    <%= f.number_field :strength, min: 4, max: 12, step: 2,
+    value: @character.strength || 6 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :vigor %>
+    <%= f.number_field :vigor, min: 4, max: 12, step: 2,
+    value: @character.vigor || 6 %>
+  </div>
+<hr>
+  <div class="field">
+      <strong>Skills</strong>
+
+    <%= f.fields_for :skills do |s| %>
+      <% all_skills.each do |this_skill| %>
+        <%= s.label this_skill %>
+        <%= s.number_field this_skill, min: 0, max: 12, step: 2,
+        value: @character.skills[this_skill] || 0 %>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

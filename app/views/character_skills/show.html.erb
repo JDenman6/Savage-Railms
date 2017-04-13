@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @character_skill.name %>
+</p>
+
+<p>
+  <strong>Linked attribute:</strong>
+  <%= CharacterAttribute.find(@character_skill.character_attribute_id).name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @character_skill.description %>
+</p>
+
+<%= link_to 'Edit', edit_character_skill_path(@character_skill) %> |
+<%= link_to 'Back', character_skills_path %>
