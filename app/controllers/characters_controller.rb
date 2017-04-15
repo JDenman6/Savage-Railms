@@ -65,6 +65,7 @@ class CharactersController < ApplicationController
   end
 
   def roll
+    ## the if/else here had a bug that might creep back in. I should write a test for this.
     ability = params[:roll_type]
     if ability == "skills"
       skill = params[:skill_type]
